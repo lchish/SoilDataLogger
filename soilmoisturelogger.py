@@ -11,13 +11,11 @@ ser = serial.Serial('/dev/ttyACM2', 9600, timeout=10)
 
 with open("data_log.csv", "a") as file:
     if os.stat("data_log.csv").st_size == 0:
-        file.write("Time,Sensor1\n")
+        file.write("Time\tSensor1\n")
 
     while True:
-        varl = ser.readline()
-        varl = varl.decode('utf-8')
+        varl = ser.readline().decode('utf-8')
         #varl = varl.replace("\r'\n'",'')
         #varl = varl.replace("b'",'')
         print("Writing Reading - " + str(datetime.now()))
-        file.write(time.strftime('%l:%M%p on %b %d %Y') + "," + str(varl) + "," + "\n")
-        file.flush()
+        file.write(time.strftime('%l:%M%p on %b %d %Y') + "t" + str(varl) + "\n")
